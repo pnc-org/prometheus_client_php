@@ -271,7 +271,8 @@ class APC implements Adapter
      */
     private function toInteger($val)
     {
-        return unpack('Q', pack('d', $val))[1];
+        $item = unpack('Q', pack('d', $val));
+        return $item[1];
     }
 
     /**
