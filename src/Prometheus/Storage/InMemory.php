@@ -7,10 +7,42 @@ use Prometheus\MetricFamilySamples;
 
 class InMemory implements Adapter
 {
+    private $storeToFile;
+    private $stateFile;
 
     private $counters = array();
     private $gauges = array();
     private $histograms = array();
+
+    public function __construct($storeToFile=false) {
+        $this->storeToFile = $storeToFile;
+
+        if (!$this->storeToFile) {
+          return;
+        }
+
+        $this->stateFile = __DIR__ . "/state.json";
+
+        if (!file_exists($this->stateFile)) {
+            return;
+        }
+
+        $data = json_decode(file_get_contents($this->stateFile), true);
+        $this->counters = $data['counters'];
+        $this->gauges = $data['gauges'];
+        $this->histograms = $data['histograms'];
+    }
+
+    public function __destruct() {
+        if ($this->storeToFile) {
+            $data = json_encode(array(
+                "counters" => $this->counters,
+                "gauges" => $this->gauges,
+                "histograms" => $this->histograms
+            ), JSON_PRETTY_PRINT);
+            file_put_contents($this->stateFile, $data);
+        }
+    }
 
     /**
      * @return MetricFamilySamples[]
