@@ -14,6 +14,7 @@ before_script:
   - composer self-update
   - composer install --no-interaction --prefer-source --dev
   - phpenv rehash
+  - php -i | grep apc
 
 script:
   - vendor/bin/phpunit --verbose --colors
