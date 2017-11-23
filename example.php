@@ -17,8 +17,8 @@ use Prometheus\Storage\InMemory;
 
 $registry = new CollectorRegistry(new InMemory(/*storeToFile=*/true));
 
-$counter = $registry->registerCounter('test', 'some_counter', 'it increases', ['type']);
-$counter->incBy(3, ['blue']);
+$counter = $registry->registerCounter('test', 'some_counter', 'it increases', array('type'));
+$counter->incBy(3, array('blue'));
 
 $renderer = new RenderTextFormat();
 $result = $renderer->render($registry->getMetricFamilySamples());

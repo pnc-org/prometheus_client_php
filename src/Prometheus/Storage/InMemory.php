@@ -39,7 +39,7 @@ class InMemory implements Adapter
                 "counters" => $this->counters,
                 "gauges" => $this->gauges,
                 "histograms" => $this->histograms
-            ), JSON_PRETTY_PRINT);
+            ));
             file_put_contents($this->stateFile, $data);
         }
     }
