@@ -67,7 +67,7 @@ class InMemory implements Adapter
                         $data['samples'][] = array(
                             'name' => $metaData['name'] . '_bucket',
                             'labelNames' => array('le'),
-                            'labelValues' => array_merge($decodedLabelValues, [$bucket]),
+                            'labelValues' => array_merge($decodedLabelValues, array($bucket)),
                             'value' => $acc
                         );
                     } else {
@@ -75,7 +75,7 @@ class InMemory implements Adapter
                         $data['samples'][] = array(
                             'name' => $metaData['name'] . '_' . 'bucket',
                             'labelNames' => ['le'],
-                            'labelValues' => array_merge($decodedLabelValues, [$bucket]),
+                            'labelValues' => array_merge($decodedLabelValues, array($bucket)),
                             'value' => $acc
                         );
                     }
