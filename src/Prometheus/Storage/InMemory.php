@@ -74,7 +74,7 @@ class InMemory implements Adapter
                         $acc += $histogramBuckets[$labelValues][$bucket];
                         $data['samples'][] = array(
                             'name' => $metaData['name'] . '_' . 'bucket',
-                            'labelNames' => ['le'],
+                            'labelNames' => array('le'),
                             'labelValues' => array_merge($decodedLabelValues, array($bucket)),
                             'value' => $acc
                         );
@@ -84,7 +84,7 @@ class InMemory implements Adapter
                 // Add the count
                 $data['samples'][] = array(
                     'name' => $metaData['name'] . '_count',
-                    'labelNames' => [],
+                    'labelNames' => array(),
                     'labelValues' => $decodedLabelValues,
                     'value' => $acc
                 );
@@ -92,7 +92,7 @@ class InMemory implements Adapter
                 // Add the sum
                 $data['samples'][] = array(
                     'name' => $metaData['name'] . '_sum',
-                    'labelNames' => [],
+                    'labelNames' => array(),
                     'labelValues' => $decodedLabelValues,
                     'value' => $histogramBuckets[$labelValues]['sum']
                 );
@@ -108,12 +108,12 @@ class InMemory implements Adapter
         $result = array();
         foreach ($metrics as $metric) {
             $metaData = $metric['meta'];
-            $data = [
+            $data = array(
                 'name' => $metaData['name'],
                 'help' => $metaData['help'],
                 'type' => $metaData['type'],
                 'labelNames' => $metaData['labelNames'],
-            ];
+            );
             foreach ($metric['samples'] as $key => $value) {
                 $parts = explode(':', $key);
                 $labelValues = $parts[2];
