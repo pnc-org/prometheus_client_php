@@ -281,7 +281,8 @@ class APC implements Adapter
      */
     private function fromInteger($val)
     {
-        return unpack('d', pack('Q', $val))[1];
+        $item = unpack('d', pack('Q', $val));
+        return $item[1];
     }
 
     private function sortSamples(array &$samples)
